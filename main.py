@@ -144,4 +144,4 @@ def converter(s):
             new += charset[char]
         else:
             new += char
-    return new
+    return new.strip()
