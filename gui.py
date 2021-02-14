@@ -1,7 +1,6 @@
 # Import
 import os
 import sys
-import time
 
 # PyQt5
 from PyQt5.QtWidgets import *
