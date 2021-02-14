@@ -1,1 +1,1 @@
-Run Gui.py
+Run gui.py
