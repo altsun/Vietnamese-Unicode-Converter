@@ -1,6 +1,7 @@
 # Import
 import os
 import sys
+import time
 
 # PyQt5
 from PyQt5.QtWidgets import *
@@ -59,6 +60,7 @@ class ConverterGui(QDialog):
         # Handle events
         self.button_convert.clicked.connect(self.convert)
         self.button_copy.clicked.connect(self.copy_clipboard)
+        self.button_copy.clicked.connect(self.set_copied_message)
 
 
     # Front-end functions
@@ -102,8 +104,10 @@ class ConverterGui(QDialog):
     def copy_clipboard(self):
         if self.output_string:
             self.clipboard.setText(self.output_string)
-
-        
+    
+    def set_copied_message(self):
+        msg_box = QMessageBox()
+        msg_box.information(self, 'Copied', 'Copied: ' + self.text_output.toPlainText())
 
 
 # Run Gui
