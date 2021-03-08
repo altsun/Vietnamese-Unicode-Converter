@@ -106,7 +106,7 @@ class ConverterGui(QDialog):
     
     def set_copied_message(self):
         msg_box = QMessageBox()
-        msg_box.information(self, 'Copied', 'Copied: ' + self.text_output.toPlainText())
+        msg_box.information(self, 'Copy', 'Copy done!')
 
 
 # Run Gui
