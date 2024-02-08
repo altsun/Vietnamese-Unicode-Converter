@@ -1,3 +1,8 @@
+# Vietnamese Unicode Converter
+This is a tool used to convert Vietnamese characters to \\U+xxxx patterns. Only works with composed Unicode for now.
+
+![Demo](demo.png)
+
 ## Prerequisites
 Microsoft Visual C++ 14.0 or greater
 
