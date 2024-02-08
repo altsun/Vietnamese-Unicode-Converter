@@ -1,17 +1,10 @@
-# Import
-import os
 import sys
-
-# PyQt5
-from PyQt5.QtWidgets import *
-from PyQt5.QtCore import *
 from PyQt5.QtGui import *
+from PyQt5.QtWidgets import *
 
 import main
 
 
-
-# Class ConverterGui
 class ConverterGui(QDialog):
 
     def __init__(self):
@@ -24,77 +17,50 @@ class ConverterGui(QDialog):
         self.margin = 20
 
         # Parameters
+        self.output_string = ''
         self.clipboard = QGuiApplication.clipboard()
 
         # Create layout
         layout = QGridLayout()
 
         # Create and set elements
-        ## Input string
         self.text_input = QTextEdit()
-        self.text_input.setPlaceholderText('Nhập chuỗi')
-        ## Button convert
-        self.button_convert = QPushButton('Chuyển đổi')
-        ## Output string
+        self.text_input.setPlaceholderText('Enter text here...')
+        self.button_convert = QPushButton('Convert')
         self.text_output = QTextEdit()
-        ## Button copy to clipboard
-        self.button_copy = QPushButton('Sao chép')
+        self.button_copy = QPushButton('Copy')
 
-        # Prepare elements
-            # Set output_string to read-only
         self.text_output.setReadOnly(True)
 
-        # Add elements to layout
         layout.addWidget(self.text_input, 0, 0)
         layout.addWidget(self.button_convert, 1, 0)
         layout.addWidget(self.text_output, 2, 0)
         layout.addWidget(self.button_copy, 3, 0)
 
-        # Set layout
         self.setLayout(layout)
 
-        # Initialize UI
         self.init_ui()
 
-        # Handle events
+        # Add event handlers
         self.button_convert.clicked.connect(self.convert)
         self.button_copy.clicked.connect(self.copy_clipboard)
-        self.button_copy.clicked.connect(self.set_copied_message)
+        self.button_copy.clicked.connect(self.show_copy_message)
 
-
-    # Front-end functions
     def init_ui(self):
-        # Set window title
         self.setWindowTitle('Vietnamese Unicode Converter')
-
-        # Set window size
-        self.setGeometry(50, 50, self.width, self.height)
-
-        # Set window at center
-        self.center()
-
-        # Remove default focus
-        self.setFocus()
-
-        # Show window
-        self.show()
-
+        self.setGeometry(50, 50, self.width, self.height)  # Set window size
+        self.center()  # Set window at center
+        self.setFocus()  # Remove default focus
+        self.show()  # Show window
 
     def center(self):
-        # geometry of the main window
-        qr = self.frameGeometry()
-
-        # center point of screen
-        cp = QDesktopWidget().availableGeometry().center()
-
-        # move rectangle's center point to screen's center point
-        qr.moveCenter(cp)
+        qr = self.frameGeometry()  # geometry of the main window
+        screen_center_point = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(screen_center_point)
 
         # top left of rectangle becomes top left of window centering it
         self.move(qr.topLeft())
 
-
-    # Back-end functions
     def convert(self):
         input_string = self.text_input.toPlainText()
         self.output_string = main.convert(input_string)
@@ -103,8 +69,8 @@ class ConverterGui(QDialog):
     def copy_clipboard(self):
         if self.output_string:
             self.clipboard.setText(self.output_string)
-    
-    def set_copied_message(self):
+
+    def show_copy_message(self):
         msg_box = QMessageBox()
         msg_box.information(self, 'Copy', 'Copy done!')
 
