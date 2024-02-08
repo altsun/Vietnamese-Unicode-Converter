@@ -97,7 +97,7 @@ class ConverterGui(QDialog):
     # Back-end functions
     def convert(self):
         input_string = self.text_input.toPlainText()
-        self.output_string = main.converter(input_string)
+        self.output_string = main.convert(input_string)
         self.text_output.setText(self.output_string)
 
     def copy_clipboard(self):

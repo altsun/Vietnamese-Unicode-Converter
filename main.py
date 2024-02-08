@@ -1,5 +1,6 @@
-# Vietnamese Unicode charset map
-charset = {
+# Vietnamese Unicode character encodings
+# Source: https://vietunicode.sourceforge.net/charset/
+VIETNAMESE_CHARACTER_ENCODINGS = {
     'À': '\\U+00C0',
     'Á': '\\U+00C1',
     'Â': '\\U+00C2',
@@ -137,12 +138,21 @@ charset = {
 }
 
 
-# Converter
-def converter(s):
-    new = ''
-    for char in s:
-        if char in charset:
-            new += charset[char]
+def convert(s):
+    """
+    Function to convert a string by replacing Vietnamese characters with their corresponding encodings.
+
+    Parameters:
+    s (str): The input string to be converted.
+
+    Returns:
+    str: The converted string with Vietnamese characters replaced by their encodings.
+    """
+    stripped_input = s.strip()
+    result = ''
+    for char in stripped_input:
+        if char in VIETNAMESE_CHARACTER_ENCODINGS:
+            result += VIETNAMESE_CHARACTER_ENCODINGS[char]
         else:
-            new += char
-    return new.strip()
+            result += char
+    return result
